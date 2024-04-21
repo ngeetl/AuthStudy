@@ -1,35 +1,47 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
-// 폼 입력을 위한 타입 정의
-interface IFormInput {
-    username: string;
-    email: string;
-    password: string;
-    checkpassword: string;
-}
+import { FormInput } from '../model/FromInput';
+import axiosInstance from '../utils/axios';
 
 const SignUpPage: React.FC = () => {
-    const [formData, setFormData] = useState<IFormInput>({
+    const [formData, setFormData] = useState<FormInput>({
         username: '',
         email: '',
         password: '',
         checkpassword: ''
     });
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<IFormInput>();
-
+    // react-hook-form
+    const { register, handleSubmit, watch, formState: { errors } } = useForm<FormInput>();
     const password = watch('password');
 
-    const onSubmit = (formData: IFormInput): void => {
-        console.log('Submitted data:', formData);
-    };
-
+    // input change event
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value,
         });
+    };
+
+    // submit event 
+    const onSubmit = async({username, email, password}: FormInput): void => {
+        // console.log('Submitted data:', formData);
+        try {
+            const body = {
+                username,
+                email,
+                password,
+            }
+    
+            const res = await axiosInstance.post(
+                `/signup`,
+                body
+            )
+
+        } catch (error) {
+            
+        }
+
     };
 
 
