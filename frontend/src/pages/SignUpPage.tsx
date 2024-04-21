@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormInput } from '../model/FromInput';
 import axiosInstance from '../utils/axios';
+import { useNavigate } from 'react-router-dom';
 
 const SignUpPage: React.FC = () => {
+    const navigate  = useNavigate();
     const [formData, setFormData] = useState<FormInput>({
         username: '',
         email: '',
@@ -41,6 +43,7 @@ const SignUpPage: React.FC = () => {
                 // res.data.username을 리덕스에 저장
 
                 // signin 페이지로 리디렉션
+                navigate('/signin')
             }
         } catch (error) {
             console.log(error)
@@ -50,7 +53,7 @@ const SignUpPage: React.FC = () => {
 
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+        <div className="flex flex-col items-center justify-center min-h-screen">
             <form onSubmit={handleSubmit(onSubmit)} className="p-8 bg-white rounded shadow-md w-1/3">
                 <h1 className="text-xl font-bold mb-4 text-center">회원가입</h1>
                 <label className="block mb-2">

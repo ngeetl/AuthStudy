@@ -23,7 +23,7 @@ const SignInPage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex flex-col items-center justify-center min-h-screen">
       <form onSubmit={handleSubmit(onSubmit)} className="p-8 bg-white rounded shadow-md w-1/3">
         <h1 className="text-xl font-bold mb-4 text-center">로그인</h1>
         <label className="block mb-2">

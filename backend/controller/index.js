@@ -8,7 +8,7 @@ const signup = async(req, res) => {
         // 1. db에 이미 유저가 있는지
         const existingUser = await User.findOne({ email: email });
         if (existingUser) {
-            return res.status(409).json({ message: "Email already in use." });
+            return res.status(400).json({ message: "Email already in use." });
         }
 
         // 2. 비밀번호 해싱
