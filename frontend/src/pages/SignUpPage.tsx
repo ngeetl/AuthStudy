@@ -24,8 +24,7 @@ const SignUpPage: React.FC = () => {
     };
 
     // submit event 
-    const onSubmit = async({username, email, password}: FormInput): void => {
-        // console.log('Submitted data:', formData);
+    const onSubmit = async({username, email, password}: FormInput): Promise<void> => {
         try {
             const body = {
                 username,
@@ -38,8 +37,13 @@ const SignUpPage: React.FC = () => {
                 body
             )
 
+            if(res.status === 200) {
+                // res.data.username을 리덕스에 저장
+
+                // signin 페이지로 리디렉션
+            }
         } catch (error) {
-            
+            console.log(error)
         }
 
     };
