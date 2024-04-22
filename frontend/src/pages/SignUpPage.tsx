@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { FormInput } from '../model/FromInput';
 import axiosInstance from '../utils/axios';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 
 const SignUpPage: React.FC = () => {
     const navigate  = useNavigate();
@@ -46,7 +48,9 @@ const SignUpPage: React.FC = () => {
                 navigate('/signin')
             }
         } catch (error) {
-            console.log(error)
+            if (axios.isAxiosError(error)) {
+                console.log(error.response?.data.message);
+              }
         }
 
     };
