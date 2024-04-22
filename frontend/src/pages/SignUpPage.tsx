@@ -7,7 +7,7 @@ import axios from 'axios';
 
 
 const SignUpPage: React.FC = () => {
-    const navigate  = useNavigate();
+    const navigate = useNavigate();
     const [formData, setFormData] = useState<FormInput>({
         username: '',
         email: '',
@@ -28,29 +28,30 @@ const SignUpPage: React.FC = () => {
     };
 
     // submit event 
-    const onSubmit = async({username, email, password}: FormInput): Promise<void> => {
+    const onSubmit = async ({ username, email, password }: FormInput): Promise<void> => {
         try {
             const body = {
                 username,
                 email,
                 password,
             }
-    
+
             const res = await axiosInstance.post(
                 `/signup`,
                 body
             )
 
-            if(res.status === 200) {
+            if (res.status === 200) {
                 // res.data.username을 리덕스에 저장 -> 로그인시
 
+                await alert("회원가입에 성공하였습니다.");
                 // signin 페이지로 리디렉션
                 navigate('/signin')
             }
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.log(error.response?.data.message);
-              }
+            }
         }
 
     };
