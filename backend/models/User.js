@@ -35,5 +35,14 @@ userSchema.pre('save', async function(next) {
     next();
 })
 
+// user 로그인시 입력한 비밀번호와 hash된 비밀번호를 확인
+userSchema.methods.comparePassword = async function(plainPassword) {
+    let user = this; // 요청한 유저의 데이터베이스 정보
+    const match = await bcrypt.compare(plainPassword, user.password); 
+    
+    return match; // true 또는 false
+}
+
+
 
 module.exports = mongoose.model("User", userSchema);

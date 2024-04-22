@@ -38,7 +38,10 @@ const signin = async(req, res) => {
         }
     
         // 2. db의 비밀번호와 클라이언트에서 받은 user의 비밀번호 비교
-    
+        const isMatch = await User.comparePassword(password);
+
+        if(!isMatch) return res.status(400).json({ message: "비밀번호가 일치하지 않습니다."})
+
         // 3. accessToken/RefreshToken 발급
     
         // 4. email, username, role 응답 

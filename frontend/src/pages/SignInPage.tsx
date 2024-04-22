@@ -1,25 +1,36 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { LoginFormInput } from '../model/FromInput';
+import axiosInstance from '../utils/axios';
 
 const SignInPage: React.FC = () => {
   const [formData, setFormData] = useState<LoginFormInput>({
-      email: '',
-      password: '',
+    email: '',
+    password: '',
   });
 
   const { register, handleSubmit, formState: { errors } } = useForm<LoginFormInput>();
 
 
-  const onSubmit = (formData: LoginFormInput): void => {
-      console.log('Submitted data:', formData);
+  const onSubmit = ({ email, password }: LoginFormInput): void => {
+    try {
+      const body = { email, password }
+      const res = axiosInstance.post(`/signin`, body)
+
+      // dispatch(setUser)
+      // token처리
+
+      
+    } catch (error) {
+      
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setFormData({
-          ...formData,
-          [e.target.name]: e.target.value,
-      });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   return (
