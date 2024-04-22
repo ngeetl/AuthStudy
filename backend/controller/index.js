@@ -3,7 +3,7 @@ const User = require("../models/User")
 
 const signup = async (req, res) => {
     try {
-        // const { username, email, password, role } = req.body;
+        const { username, email, password, role } = req.body;
 
         // 1. db에 이미 유저가 있는지
         const existingUser = await User.findOne({ email: email });
