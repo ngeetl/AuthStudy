@@ -40,7 +40,7 @@ const SignUpPage: React.FC = () => {
             )
 
             if(res.status === 200) {
-                // res.data.username을 리덕스에 저장
+                // res.data.username을 리덕스에 저장 -> 로그인시
 
                 // signin 페이지로 리디렉션
                 navigate('/signin')

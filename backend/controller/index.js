@@ -17,7 +17,7 @@ const signup = async(req, res) => {
         const userInstance = new User(req.body) //인스턴스 생성
         const user = await userInstance.save() //저장
     
-        // 4. 필요한 유저 정보 반환
+        // 4. 필요한 유저 정보 반환 -> 로그인시
         const userInfo = {
             username: user.username
         }

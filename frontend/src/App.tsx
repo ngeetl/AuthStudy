@@ -7,7 +7,6 @@ import Header from './components/Header'
 import ProtectedRoute from './components/ProtectedRoute'
 
 
-
 const App: React.FC = () => {
   // 리덕스로 isAuth 받아옴
   let isAuth: boolean = false;
