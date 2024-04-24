@@ -12,13 +12,14 @@ const SignInPage: React.FC = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<LoginFormInput>();
 
 
-  const onSubmit = ({ email, password }: LoginFormInput): void => {
+  const onSubmit = async ({ email, password }: LoginFormInput): Promise<void> => {
     try {
       const body = { email, password }
-      const res = axiosInstance.post(`/signin`, body)
+      const res = await axiosInstance.post(`/signin`, body)
 
-      // dispatch(setUser)
+      // dispatch(setUser)a
       // token처리
+      console.log(res)
 
       
     } catch (error) {
