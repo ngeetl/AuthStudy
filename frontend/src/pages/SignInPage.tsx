@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { LoginFormInput } from '../model/FromInput';
 import axiosInstance from '../utils/axios';
+import { setUser } from '../store/userSlice';
+import { useAppDispatch } from '../hooks';
 
 const SignInPage: React.FC = () => {
+  const dispatch = useAppDispatch();
   const [formData, setFormData] = useState<LoginFormInput>({
     email: '',
     password: '',
@@ -17,13 +20,24 @@ const SignInPage: React.FC = () => {
       const body = { email, password }
       const res = await axiosInstance.post(`/signin`, body)
 
-      // dispatch(setUser)a
-      // token처리
       console.log(res)
+
+      dispatch(setUser({
+        userData: {
+          id: res.data._id,
+          email: res.data.email,
+          username: res.data.username,
+          role: res.data.role
+        }, 
+        isAuth: true
+      }));
+
+      // token처리
+      console.log('res => ',res)
 
       
     } catch (error) {
-      
+      console.log(error)
     }
   };
 

@@ -67,10 +67,10 @@ const signin = async (req, res) => {
         });
 
         // 5. 응답 
-        res.status(200).json({ message: "로그인이 성공하였습니다."})
+        return res.status(200).json(user);
  
     } catch (error) {
-        res.status(500).json(error);
+        return res.status(500).json(error);
     }
 }
 
