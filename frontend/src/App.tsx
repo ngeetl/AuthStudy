@@ -8,6 +8,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import { useEffect, useState } from 'react'
 import { useAppSelector } from './hooks'
 import { selectUser } from './store/userSlice'
+import BestMenu from './components/BestMenu'
 
 
 const App: React.FC = () => {
@@ -24,6 +25,7 @@ const App: React.FC = () => {
         <Header />
         <Routes>
           <Route path='/' element={<MainPage />} />
+          <Route path='/test' element={<BestMenu/>}/>
 
           {/* 로그인된 유저는 접근 불가능 */}
           <Route element={<ProtectedRoute isAuth={user.isAuth}/>}>

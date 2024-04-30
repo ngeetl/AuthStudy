@@ -1,17 +1,40 @@
+import styled from '@emotion/styled'
+import { Button, ThemeProvider, Card, Menu, MenuItem, MenuList, Typography } from '@mui/material'
 import React from 'react'
-import { Menu } from '../model/restaurant'
+import theme from './theme'
 
-interface OwnProps extends Omit<Menu, 'price'> {
-    showBestMenu(name:string):string
-}
 
-const BestMenu:React.FC<OwnProps> = ({name, showBestMenu}) => {
+const CustomButton = styled(Button)(() => ({
+  margin: "20px",
+  // '&:hover': {
+  // backgroundColor: "green",
+  // color: "red"
+  // }
+}))
+
+const BestMenu: React.FC = () => {
   return (
     <div>
-      BestMenu
-      {name + showBestMenu}
+      <ThemeProvider theme={theme}>
+        <CustomButton variant="contained">
+          Hello world
+        </CustomButton>
+        {/* <Menu> */}
+        <Typography color='warning.main' variant='body2' >
+          안녕 hello
+        </Typography>
+          <MenuList variant='selectedMenu'>
+            <MenuItem selected>home</MenuItem>
+            <MenuItem>home</MenuItem>
+            <MenuItem>home</MenuItem>
+          </MenuList>
+        {/* </Menu> */}
+        <Card raised={true} sx={{ height: '100px', mx: '30px' }}>dd</Card>
+      </ThemeProvider>
     </div>
   )
 }
 
 export default BestMenu
+
+
