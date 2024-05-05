@@ -6,7 +6,10 @@ const mongoose = require('mongoose');
 const {
     signup,
     signin,
+    logout,
+    refreshToken
 } = require("./controller");
+const auth = require("./middleware/auth");
 
 const app = express();
 dotenv.config();
@@ -26,6 +29,8 @@ mongoose.connect(process.env.DB_CONNECT)
 
 app.post("/signup", signup);
 app.post("/signin", signin);
+app.get("/logout", logout);
+app.get("/refreshToken", auth, refreshToken);
 
 app.listen(process.env.PORT, () => {
     console.log(`server is on ${process.env.PORT}`);

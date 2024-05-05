@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User")
-const auth = require("..middleware/auth")
 
 const signup = async (req, res) => {
     try {
@@ -79,7 +78,7 @@ const signin = async (req, res) => {
 // 1. 토큰이 유효한지 확인
 // 2. payload에 유저 정보로 isAdmin 확인
 
-const refreshToken = async (req, auth, res) => {
+const refreshToken = async (req, res, next) => {
     try {
         const token = req.cookies.refreshToken;
         const tokenData = jwt.verify(token, process.env.REFRESH_SECRET);
@@ -111,7 +110,7 @@ const refreshToken = async (req, auth, res) => {
 }
 
 
-const logout = async (req, auth, res) => {
+const logout = async (req, res, next) => {
     try {
         req.cookie('accessToken', '');
         res.status(200).json("logout Success");
@@ -123,6 +122,6 @@ const logout = async (req, auth, res) => {
 module.exports = {
     signup,
     signin,
-    logout
-    
+    logout,
+    refreshToken
 };
