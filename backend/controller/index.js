@@ -78,9 +78,49 @@ const signin = async (req, res) => {
 // 1. 토큰이 유효한지 확인
 // 2. payload에 유저 정보로 isAdmin 확인
 
+const refreshToken = async (req, res) => {
+    try {
+        const token = req.cookies.refreshToken;
+        const tokenData = jwt.verify(token, process.env.REFRESH_SECRET);
+        const user = await User.findOne({ email: tokenData.email });
 
+        // accessToken 새로 발급
+        const payload = {
+            id: user._id.toHexString(),
+            username: user.username,
+            email: user.email
+        };
+        const options = {
+            expiresIn: '1m',
+            issuer: 'kai'
+        };
+
+        const accessToken = jwt.sign(payload, process.env.ACCESS_SECRET, options);
+
+        res.cookie("accessToken", accessToken, {
+            secure: false,
+            httpOnly: true //자바스크,립트에서 접근 불가
+        });
+
+        res.sendStatus(200);
+    } catch (error) {
+        return res.status(500).json(error);
+        
+    }
+}
+
+
+const logout = async (req, res) => {
+    try {
+        req.cookie('accessToken', '');
+        res.status(200).json("logout Success");
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
 
 module.exports = {
     signup,
     signin,
+    logout
 };

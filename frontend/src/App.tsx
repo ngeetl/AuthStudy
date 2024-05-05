@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react'
 import { useAppSelector } from './hooks'
 import { selectUser } from './store/userSlice'
 import BestMenu from './components/BestMenu'
+import Mypage from './pages/Mypage'
 
 
 const App: React.FC = () => {
@@ -21,11 +22,12 @@ const App: React.FC = () => {
 
   return (
     <>
-      <BrowserRouter>
+      {/* <BrowserRouter> */}
         <Header />
         <Routes>
           <Route path='/' element={<MainPage />} />
-          <Route path='/test' element={<BestMenu/>}/>
+          <Route path='/test' element={<BestMenu/>} />
+          <Route path='/mypage' element={<Mypage/>} />
 
           {/* 로그인된 유저는 접근 불가능 */}
           <Route element={<ProtectedRoute isAuth={user.isAuth}/>}>
@@ -33,7 +35,7 @@ const App: React.FC = () => {
             <Route path='/signup' element={<SignUpPage />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      {/* </BrowserRouter> */}
     </>
   )
 }
