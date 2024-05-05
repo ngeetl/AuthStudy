@@ -20,8 +20,6 @@ const SignInPage: React.FC = () => {
       const body = { email, password }
       const res = await axiosInstance.post(`/signin`, body)
 
-      console.log(res)
-
       dispatch(setUser({
         userData: {
           id: res.data._id,
@@ -31,11 +29,6 @@ const SignInPage: React.FC = () => {
         }, 
         isAuth: true
       }));
-
-      // token처리
-      console.log('res => ',res)
-
-      
     } catch (error) {
       console.log(error)
     }

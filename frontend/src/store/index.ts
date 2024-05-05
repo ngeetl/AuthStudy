@@ -1,8 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
-import { FLUSH, PAUSE, PERSIST, REHYDRATE, persistReducer } from 'redux-persist';
-// import storageSession from 'redux-persist/lib/storage' // defaults to localStorage for web
+import { FLUSH, PAUSE, PERSIST, REHYDRATE, persistReducer, persistStore } from 'redux-persist';
 import userReducer from './userSlice'
-import persistStore from 'redux-persist/es/persistStore';
 import storage from 'redux-persist/lib/storage';
 
 const persistConfig = {
