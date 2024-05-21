@@ -4,6 +4,7 @@ import { LoginFormInput } from '../model/FromInput';
 import axiosInstance from '../utils/axios';
 import { setUser } from '../store/userSlice';
 import { useAppDispatch } from '../hooks';
+import axios from 'axios';
 
 const SignInPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -13,7 +14,6 @@ const SignInPage: React.FC = () => {
   });
 
   const { register, handleSubmit, formState: { errors } } = useForm<LoginFormInput>();
-
 
   const onSubmit = async ({ email, password }: LoginFormInput): Promise<void> => {
     try {
@@ -26,11 +26,13 @@ const SignInPage: React.FC = () => {
           email: res.data.email,
           username: res.data.username,
           role: res.data.role
-        }, 
+        },
         isAuth: true
       }));
     } catch (error) {
-      console.log(error)
+      if (axios.isAxiosError(error)) {
+        alert(error.response?.data?.message);
+      }
     }
   };
 

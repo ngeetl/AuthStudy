@@ -34,13 +34,14 @@ const signin = async (req, res) => {
         const user = await User.findOne({ email: email });
     
         if(!user) {
-            return res.status(400).json({ message: "존재하지 않는 이메일" });
+            return res.status(401).json({ message: "존재하지 않는 이메일" });
         }
     
         // 2. db의 비밀번호와 클라이언트에서 받은 user의 비밀번호 비교
         const isMatch = await user.comparePassword(password);
 
-        if(!isMatch) return res.status(400).json({ message: "비밀번호가 일치하지 않습니다."})
+        if(!isMatch) return res.status(401).json({ message: "비밀번호가 일치하지 않습니다."})
+
 
         // 3. accessToken/RefreshToken 발급
         const payload = {
@@ -112,7 +113,8 @@ const refreshToken = async (req, res, next) => {
 
 const logout = async (req, res, next) => {
     try {
-        req.cookie('accessToken', '');
+        console.log(req.cookie)
+        // req.cookie('accessToken', '');
         res.status(200).json("logout Success");
     } catch (error) {
         res.status(500).json(error);
